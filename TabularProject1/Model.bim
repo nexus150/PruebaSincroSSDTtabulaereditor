@@ -15,7 +15,6 @@
           "authentication": null,
           "query": null
         },
-        "options": {},
         "credential": {
           "AuthenticationKind": "ServiceAccount",
           "kind": "File",
@@ -118,6 +117,13 @@
             "isNameInferred": true,
             "isDataTypeInferred": true,
             "sourceColumn": "DolarToday[Fecha]"
+          },
+          {
+            "type": "calculated",
+            "name": "Columna calculada 1",
+            "dataType": "int64",
+            "isDataTypeInferred": true,
+            "expression": "year('CalculatedTable 1'[Fecha])"
           }
         ],
         "partitions": [
