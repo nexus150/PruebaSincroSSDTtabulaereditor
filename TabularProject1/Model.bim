@@ -135,12 +135,61 @@
             }
           }
         ]
+      },
+      {
+        "name": "New Calculated Table",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fecha",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DolarToday[Fecha]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "New Calculated Table",
+            "mode": "import",
+            "source": {
+              "type": "calculated",
+              "expression": "ALLNOBLANKROW(DolarToday[Fecha])"
+            }
+          }
+        ]
+      },
+      {
+        "name": "CalculatedTable 2",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fecha",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "CalculatedTable 1[Fecha]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 2",
+            "source": {
+              "type": "calculated",
+              "expression": "VALUES('CalculatedTable 1'[Fecha])"
+            }
+          }
+        ]
       }
     ],
     "annotations": [
       {
         "name": "ClientCompatibilityLevel",
         "value": "500"
+      },
+      {
+        "name": "__TEdtr",
+        "value": "1"
       }
     ]
   },
