@@ -1,0 +1,142 @@
+{
+  "name": "SemanticModel",
+  "compatibilityLevel": 1400,
+  "model": {
+    "culture": "es-AR",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "File/C:\\Users\\nexus\\Desktop\\dolartoday xlsx",
+        "connectionDetails": {
+          "protocol": "file",
+          "address": {
+            "path": "C:\\Users\\nexus\\Desktop\\dolartoday.xlsx"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "options": {},
+        "credential": {
+          "AuthenticationKind": "ServiceAccount",
+          "kind": "File",
+          "path": "c:\\users\\nexus\\desktop\\dolartoday.xlsx"
+        },
+        "contextExpression": [
+          "let",
+          "    #\"0001\" = Excel.Workbook(..., null, true)",
+          "in",
+          "    #\"0001\""
+        ]
+      }
+    ],
+    "tables": [
+      {
+        "name": "DolarToday",
+        "columns": [
+          {
+            "name": "Fecha",
+            "dataType": "string",
+            "sourceColumn": "Fecha"
+          },
+          {
+            "name": "DolarToday",
+            "dataType": "double",
+            "sourceColumn": "DolarToday"
+          },
+          {
+            "name": "Column3",
+            "dataType": "string",
+            "sourceColumn": "Column3"
+          },
+          {
+            "name": "Column4",
+            "dataType": "string",
+            "sourceColumn": "Column4"
+          },
+          {
+            "name": "Column5",
+            "dataType": "string",
+            "sourceColumn": "Column5"
+          },
+          {
+            "name": "DolarToday Venezuela",
+            "dataType": "string",
+            "sourceColumn": "DolarToday Venezuela"
+          },
+          {
+            "name": "Column7",
+            "dataType": "string",
+            "sourceColumn": "Column7"
+          },
+          {
+            "name": "Column8",
+            "dataType": "string",
+            "sourceColumn": "Column8"
+          },
+          {
+            "name": "Column9",
+            "dataType": "string",
+            "sourceColumn": "Column9"
+          },
+          {
+            "name": "Column10",
+            "dataType": "string",
+            "sourceColumn": "Column10"
+          },
+          {
+            "name": "Column11",
+            "dataType": "string",
+            "sourceColumn": "Column11"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"File/C:\\Users\\nexus\\Desktop\\dolartoday xlsx\",",
+                "    DolarToday_Sheet = Source{[Item=\"DolarToday\",Kind=\"Sheet\"]}[Data],",
+                "    #\"Encabezados promovidos\" = Table.PromoteHeaders(DolarToday_Sheet, [PromoteAllScalars=true]),",
+                "    #\"Tipo cambiado\" = Table.TransformColumnTypes(#\"Encabezados promovidos\",{{\"Fecha\", type text}, {\"DolarToday\", type number}, {\"Column3\", type any}, {\"Column4\", type text}, {\"Column5\", type any}, {\"DolarToday Venezuela\", type any}, {\"Column7\", type any}, {\"Column8\", type any}, {\"Column9\", type any}, {\"Column10\", type any}, {\"Column11\", type any}})",
+                "in",
+                "    #\"Tipo cambiado\""
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "CalculatedTable 1",
+        "columns": [
+          {
+            "type": "calculatedTableColumn",
+            "name": "Fecha",
+            "dataType": "string",
+            "isNameInferred": true,
+            "isDataTypeInferred": true,
+            "sourceColumn": "DolarToday[Fecha]"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "CalculatedTable 1",
+            "source": {
+              "type": "calculated",
+              "expression": "ALLNOBLANKROW(DolarToday[Fecha])"
+            }
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "500"
+      }
+    ]
+  },
+  "id": "SemanticModel"
+}
